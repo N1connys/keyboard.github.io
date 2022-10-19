@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>kbd_js</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="keb" id="div1"></div>
+    </main>   
+    <footer></footer>
+    <script>
+         keys={
+            '0':{0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '1':{0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+            '2':{0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+            'length':3
+        }
+         hash=
+        {
+            'q':'huya.com',
+            'w':'weibo.com',
+            'e':'ele.me',
+            't':'tianya.com',
+            'y':'youtube.com',
+            'b':'bilibili.com',
+            'p':'pornhub.com',
+            'a':'bilibili.com',
+            'v':'juejin.com'
+        }
+         hashInlocalStorage=JSON.parse(localStorage.getItem('uu') || 'null')
+        //取出logclz中的uu对应的hash
+        if(hashInlocalStorage)
+        {
+            hash = hashInlocalStorage
+        }
+        index=0
+        while(index<keys['length'])
+        {
+            div11=document.createElement('div')
+           div11.className='row'
+            div1.appendChild(div11)
+            row = keys[index]
+             index2=0
+            while(index2<row['length'])
+            {
+                z=document.createElement('kbd')
+                span=document.createElement('span')
+
+                span.textContent=row[index2]
+                span.className='text'
+                z.appendChild(span)
+                z.className='key'
+                buttonx=document.createElement('button')
+                buttonx.textContent='编辑'
+                buttonx.id=row[index2]
+                img1=document.createElement('img')
+                if(hash[row[index2]])
+                {
+                    img1.src='http://'+hash[row[index2]]+'/favicon.ico'
+                }
+                else
+                {
+                    img1.src='//s2.loli.net/2022/10/18/17XHVn5NhTzOEWs.png'
+                }
+               
+                document.onclick=function(zywoo)
+                {
+                    key=(zywoo['target']['id'])
+                    // 取到按钮里面的ID，去hash里面的target的id，
+                    // 用button会出错，导致每个button都是最后一个，因为button是个容器
+                    x=prompt('给我一个网址')
+                    hash[key]=x//变更了，就备份
+                    //这两行只要用户设置了任何一个key，就存入uu
+                    localStorage.setItem('uu', JSON.stringify(hash))//把HASH存入uu里面。localstorage有很多桶
+                    //相当于让local出现一个uu的桶，桶里面的内容就是hash。
+                    console.log(hash)
+                    // 让hash的key等于qq.com
+                }
+                z.appendChild(img1)
+                z.appendChild(buttonx)
+                div11.appendChild(z)
+                index2=index2+1
+            }
+            index=index+1
+        }
+        document.onkeypress=function(niko)
+        {
+            console.log('你输入了一个键')
+            key=niko['key']
+            website=hash[key]
+            console.log(website)
+             location.href = 'http://'+website
+            // windows.open('http//'+website, '_blank')
+        }
+        
+    </script>
+</body>
+</html>
